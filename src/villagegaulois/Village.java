@@ -45,7 +45,10 @@ public class Village {
 		return null;
 	}
 
-	public String afficherVillageois() {
+	public String afficherVillageois() throws VillageSansChefException {
+		if(chef == null) {
+			throw new VillageSansChefException("Pas de chef dans le village.");
+		}
 		StringBuilder chaine = new StringBuilder();
 		if (nbVillageois < 1) {
 			chaine.append("Il n'y a encore aucun habitant au village du chef "
@@ -129,7 +132,7 @@ public class Village {
 				}
 			}
 			
-			return retour + "Il reste " +nbEtalVide + " étals non utilisés dans le marché.\n";
+			return retour + "Il reste " +nbEtalVide + " ï¿½tals non utilisï¿½s dans le marchï¿½.\n";
 			
 		}
 	}
@@ -140,7 +143,7 @@ public class Village {
 		int indiceEtal = marche.trouverEtalLibre();
 		if(indiceEtal >=0 ) {
 			marche.utiliserEtal(indiceEtal, vendeur, produit, nbProduit);
-			retour.append("Le vendeur "+ vendeur.getNom() + " vend des " + produit + " à l'étal n°" +( indiceEtal + 1) +"\n");
+			retour.append("Le vendeur "+ vendeur.getNom() + " vend des " + produit + " ï¿½ l'ï¿½tal nï¿½" +( indiceEtal + 1) +"\n");
 		}
 		else {
 			retour.append( "Plus de place pour le vendeur " + vendeur.getNom() + "\n");
@@ -153,7 +156,7 @@ public class Village {
 		StringBuilder retour = new StringBuilder();
 		Etal[] etalsPrdt = marche.trouverEtals(produit);
 		if(etalsPrdt.length == 0) {
-			retour.append( "Il n'y a pas de vendeur qui propose des " +produit+" au marché.");
+			retour.append( "Il n'y a pas de vendeur qui propose des " +produit+" au marchï¿½.");
 		}else {
 			retour.append("Les vendeurs qui proposent des " + produit +" sont :\n");
 			for (int i = 0; i < etalsPrdt.length; i++) {
@@ -176,14 +179,14 @@ public class Village {
 		if(etalVdr != null) {
 			retour = etalVdr.libererEtal() + "\n";
 		}else {
-			retour = "Le vendeur " + vendeur.getNom() + " n'était pas au marché aujourd'hui !\n";
+			retour = "Le vendeur " + vendeur.getNom() + " n'ï¿½tait pas au marchï¿½ aujourd'hui !\n";
 		}
 		
 		return retour;
 	}
 	
 	public String afficherMarche() {
-		return "Le marché du village \" "+ nom + "\" possède plusieurs étals :\n" + marche.afficherMarche() + "\n";
+		return "Le marchï¿½ du village \" "+ nom + "\" possï¿½de plusieurs ï¿½tals :\n" + marche.afficherMarche() + "\n";
 	}
 	
 }
